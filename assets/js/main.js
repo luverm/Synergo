@@ -24,6 +24,44 @@ document.addEventListener("DOMContentLoaded", () => {
   body.classList.add("js-enhanced");
   body.classList.add(document.querySelector(".hero") ? "page-home" : "page-inner");
 
+  const isHomePage = body.classList.contains("page-home");
+  const introElement = document.querySelector(".home-intro");
+  const introStorageKey = "synergo-home-intro-seen";
+  let hasSeenIntro = false;
+
+  try {
+    hasSeenIntro = window.sessionStorage.getItem(introStorageKey) === "true";
+  } catch (error) {
+    hasSeenIntro = false;
+  }
+
+  if (
+    isHomePage &&
+    introElement &&
+    !hasSeenIntro &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    body.classList.add("intro-active");
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        body.classList.add("intro-ready");
+      });
+    });
+
+    window.setTimeout(() => {
+      body.classList.add("intro-complete");
+      body.classList.remove("intro-active");
+      try {
+        window.sessionStorage.setItem(introStorageKey, "true");
+      } catch (error) {
+        // Ignore storage failures and keep the intro as a progressive enhancement.
+      }
+    }, 1900);
+  } else if (introElement) {
+    body.classList.add("intro-complete");
+  }
+
   if (nav && navLinks) {
     navLinks.querySelectorAll("a.has-dropdown").forEach((link) => {
       const menuItems = submenuConfig[link.getAttribute("href")];

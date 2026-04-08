@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Synergo — Forward in food processing</title>
+<title>Synergo &mdash; Forward in food processing</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -22,6 +22,223 @@
     font-family: 'Open Sans', sans-serif;
     color: var(--text-dark);
     -webkit-font-smoothing: antialiased;
+  }
+
+  body.intro-active {
+    overflow: hidden;
+  }
+
+  body.intro-active nav,
+  body.intro-active .hero-content,
+  body.intro-active .services,
+  body.intro-active .about,
+  body.intro-active .stats,
+  body.intro-active footer {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(18px);
+    pointer-events: none;
+  }
+
+  nav,
+  .hero-content,
+  .services,
+  .about,
+  .stats,
+  footer {
+    transition:
+      opacity 700ms ease,
+      filter 700ms ease,
+      transform 700ms ease;
+  }
+
+  .home-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(168,212,36,0.16), transparent 28%),
+      radial-gradient(circle at 80% 18%, rgba(26,39,68,0.10), transparent 30%),
+      linear-gradient(135deg, #f7f9fb 0%, #eef3f8 45%, #ffffff 100%);
+    transition:
+      opacity 650ms ease,
+      visibility 650ms ease,
+      transform 1100ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-origin: 120px 64px;
+  }
+
+  .home-intro::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, transparent 0%, rgba(168,212,36,0.12) 48%, transparent 100%);
+    opacity: 0;
+    transform: translateX(-14%);
+    transition: opacity 700ms ease, transform 900ms ease;
+  }
+
+  body.intro-ready .home-intro::before {
+    opacity: 1;
+    transform: translateX(10%);
+  }
+
+  body.intro-complete .home-intro {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-37vw, -33vh) scale(0.16);
+  }
+
+  .home-intro-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    justify-items: center;
+    gap: 22px;
+    text-align: center;
+  }
+
+  .intro-logo-wrap {
+    position: relative;
+    width: min(34vw, 260px);
+    min-width: 170px;
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+  }
+
+  .intro-logo-glow {
+    position: absolute;
+    inset: 20%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168,212,36,0.38) 0%, rgba(168,212,36,0.10) 45%, transparent 72%);
+    filter: blur(18px);
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 700ms ease, transform 900ms ease;
+  }
+
+  body.intro-ready .intro-logo-glow {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .intro-logo {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    filter: drop-shadow(0 24px 44px rgba(15,26,46,0.16));
+  }
+
+  .intro-logo path {
+    fill: var(--navy);
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition:
+      opacity 520ms ease,
+      transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .intro-logo path:nth-child(1) {
+    transform: translate(-34px, 24px) rotate(-12deg) scale(0.92);
+  }
+
+  .intro-logo path:nth-child(2) {
+    transform: translate(0, -42px) rotate(10deg) scale(0.88);
+  }
+
+  .intro-logo path:nth-child(3) {
+    transform: translate(34px, 26px) rotate(12deg) scale(0.92);
+  }
+
+  body.intro-ready .intro-logo path {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+
+  body.intro-ready .intro-logo path:nth-child(1) { transition-delay: 30ms; }
+  body.intro-ready .intro-logo path:nth-child(2) { transition-delay: 140ms; }
+  body.intro-ready .intro-logo path:nth-child(3) { transition-delay: 250ms; }
+
+  .intro-kicker,
+  .intro-subline {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--navy);
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 520ms ease,
+      transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .intro-kicker {
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, 46px);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .intro-subline {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-size: clamp(11px, 1.1vw, 14px);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(26,39,68,0.68);
+  }
+
+  .intro-subline::before,
+  .intro-subline::after {
+    content: "";
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(168,212,36,0.9));
+  }
+
+  .intro-subline::after {
+    transform: scaleX(-1);
+  }
+
+  body.intro-ready .intro-kicker,
+  body.intro-ready .intro-subline {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  body.intro-ready .intro-kicker { transition-delay: 320ms; }
+  body.intro-ready .intro-subline { transition-delay: 460ms; }
+
+  @media (max-width: 768px) {
+    body.intro-complete .home-intro {
+      transform: translate(-33vw, -34vh) scale(0.12);
+    }
+
+    .home-intro-inner {
+      gap: 18px;
+    }
+
+    .intro-subline {
+      letter-spacing: 0.16em;
+      gap: 8px;
+    }
+
+    .intro-subline::before,
+    .intro-subline::after {
+      width: 28px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-intro {
+      display: none;
+    }
   }
 
   /* ─── NAVBAR ─── */
@@ -65,7 +282,7 @@
   }
   .nav-links a:hover { opacity: 0.75; }
   .nav-links a.has-dropdown::after {
-    content: '▾';
+    content: "";
     margin-left: 4px;
     font-size: 10px;
     opacity: 0.7;
@@ -414,6 +631,23 @@
 </head>
 <body>
 
+  <div class="home-intro" aria-hidden="true">
+    <div class="home-intro-inner">
+      <div class="intro-logo-wrap">
+        <div class="intro-logo-glow"></div>
+        <svg class="intro-logo" viewBox="900 -50 1300 1500" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path d="m1408.3,414.67c182.52-234.91,386.05-316.75,593.86-297.7-10.49-7.77-21.16-15.1-31.98-22.09-247.6-67.1-490.7-11.57-673,223.06-186.3,239.77-177.97,494.58-45.67,722.17-176.21-230.97-204.79-521.95-13.75-767.81C1422.32,34.77,1706.38-11.73,1969.74,94.58c-255.94-164.88-600.04-110.44-791.36,134.05-195.98,250.43-159.9,608.55,76.59,815.39-59.21-190.51-24.52-400.45,153.34-629.35Z"/>
+            <path d="m2014.84,126.6c-4.17-3.27-8.38-6.46-12.61-9.6-180.89,21.05-359.54,124.69-531.39,345.87-169.29,217.87-230.31,409.15-215.47,581.5,8,6.98,16.21,13.8,24.66,20.42l-240.05,306.74c4.17,3.27,8.38,6.46,12.61,9.6,180.89-21.05,359.54-124.69,531.39-345.87,169.29-217.87,230.31-409.15,215.47-581.5-8-6.98-16.21-13.8-24.66-20.42l240.05-306.74Z"/>
+            <path d="m1646.51,1083.47c-182.52,234.91-386.05,316.75-593.86,297.7,10.49,7.77,21.16,15.1,31.98,22.09,247.6,67.1,490.7,11.57,673-223.06,186.3-239.77,177.97-494.58,45.67-722.17,176.21,230.97,204.79,521.95,13.75,767.81-184.55,237.52-468.61,284.02-731.97,177.71,255.94,164.88,600.04,110.44,791.36-134.05,195.98-250.43,159.9-608.55-76.59-815.39,59.21,190.51,24.52,400.45-153.34,629.35Z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="intro-kicker">Forward in food processing</div>
+      <div class="intro-subline">Factory Transition Engineering</div>
+    </div>
+  </div>
+
   <!-- NAVBAR -->
   <nav>
     <a href="index.html" class="logo">
@@ -448,7 +682,7 @@
           Wat we doen
         </a>
         <a href="#about" class="btn-ghost">
-          <span class="icon">→</span>
+          <span class="icon">&rarr;</span>
           Over Synergo
         </a>
       </div>
@@ -502,9 +736,9 @@
       <div class="about-content">
         <h2>Over Synergo</h2>
         <p>Al meer dan 20 jaar is Synergo een betrouwbare partner in de foodbranche. Met een team van gepassioneerde professionals bieden wij technische oplossingen die het verschil maken.</p>
-        <p>Van haalbaarheidsstudies tot volledige projectrealisatie — wij staan naast u in elke fase van uw project.</p>
+        <p>Van haalbaarheidsstudies tot volledige projectrealisatie &mdash; wij staan naast u in elke fase van uw project.</p>
         <a href="over-synergo.html" class="btn-primary">
-          <span class="icon">→</span>
+          <span class="icon">&rarr;</span>
           Meer over ons
         </a>
       </div>
@@ -560,7 +794,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Synergo. Alle rechten voorbehouden.</span>
+      <span>&copy; 2026 Synergo. Alle rechten voorbehouden.</span>
       <span><a href="privacy.html">Privacy</a> | <a href="voorwaarden.html">Voorwaarden</a></span>
     </div>
   </footer>
