@@ -1,0 +1,438 @@
+/* Shared presentation layer for the current static site.
+   This file intentionally enhances the existing inline page styles
+   rather than replacing them all at once. */
+
+:root {
+  --site-max-width: 1180px;
+  --shadow-soft: 0 18px 45px rgba(15, 26, 46, 0.08);
+  --shadow-card: 0 20px 55px rgba(15, 26, 46, 0.12);
+  --shadow-nav: 0 16px 40px rgba(15, 26, 46, 0.08);
+  --radius-xl: 22px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --transition-base: 260ms ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(168, 212, 36, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(244, 246, 248, 0.45) 0%, rgba(255, 255, 255, 0) 18%);
+}
+
+body::selection {
+  background: rgba(168, 212, 36, 0.3);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a,
+button {
+  transition:
+    color var(--transition-base),
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    opacity var(--transition-base);
+}
+
+nav {
+  backdrop-filter: saturate(140%) blur(16px);
+  transition:
+    background-color var(--transition-base),
+    box-shadow var(--transition-base),
+    padding var(--transition-base),
+    transform var(--transition-base);
+}
+
+body.js-enhanced nav {
+  will-change: transform, background-color, box-shadow;
+}
+
+body.scrolled nav {
+  box-shadow: var(--shadow-nav);
+}
+
+body.page-home.scrolled nav {
+  background: rgba(15, 26, 46, 0.82);
+}
+
+body.page-inner.scrolled nav {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.logo {
+  position: relative;
+}
+
+.logo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--lime), transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--transition-base);
+}
+
+.logo:hover::after,
+.logo:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0.55;
+  transition: transform var(--transition-base);
+}
+
+.nav-links a:hover::before,
+.nav-links a:focus-visible::before,
+.nav-links a.active::before {
+  transform: scaleX(1);
+}
+
+.hero,
+.page-hero,
+.article,
+.projects,
+.services,
+.about,
+.stats,
+footer {
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 120px;
+  background: linear-gradient(180deg, rgba(15, 26, 46, 0) 0%, rgba(15, 26, 46, 0.45) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-content,
+.page-hero,
+.service-card,
+.about-grid > *,
+.stat-item,
+.project-card,
+.article > *,
+.footer-inner > *,
+.footer-bottom {
+  transition:
+    transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 650ms ease;
+}
+
+body.js-enhanced .reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+body.js-enhanced .reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-primary,
+.cta-btn {
+  box-shadow: 0 10px 30px rgba(168, 212, 36, 0.18);
+}
+
+.btn-primary:hover,
+.cta-btn:hover {
+  box-shadow: 0 18px 36px rgba(168, 212, 36, 0.24);
+}
+
+.btn-ghost {
+  border-radius: 999px;
+}
+
+.services,
+.projects,
+.article,
+.page-hero,
+.stats {
+  overflow: clip;
+}
+
+.service-card,
+.project-card,
+.sidebar-info,
+.cta-box,
+.about-img-main,
+.about-img-secondary {
+  box-shadow: var(--shadow-soft);
+}
+
+.service-card:hover,
+.project-card:hover,
+.sidebar-info:hover {
+  box-shadow: var(--shadow-card);
+}
+
+.service-card,
+.project-card,
+.sidebar-info,
+.cta-box {
+  border-radius: var(--radius-lg);
+}
+
+.project-card .card-img,
+.hero-img,
+.about-img-main img {
+  transition: transform 700ms ease, filter 500ms ease;
+}
+
+.project-card:hover .card-img,
+.hero-img:hover,
+.about-img-main:hover img {
+  transform: scale(1.03);
+}
+
+.project-card:hover .card-link {
+  transform: translateX(4px);
+}
+
+.page-hero,
+.stats {
+  background-image:
+    radial-gradient(circle at top right, rgba(168, 212, 36, 0.12), transparent 26%);
+}
+
+.page-hero h1,
+.hero h1,
+.article h1,
+.services h2,
+.about h2 {
+  text-wrap: balance;
+}
+
+.article {
+  position: relative;
+  z-index: 1;
+}
+
+.article::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 50%;
+  width: min(72vw, 960px);
+  height: 220px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(168, 212, 36, 0.07), transparent 68%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.article p > h2 {
+  margin: 0;
+}
+
+.cta-box {
+  overflow: hidden;
+}
+
+.cta-box::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -40% auto;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 212, 36, 0.28), transparent 65%);
+  pointer-events: none;
+}
+
+footer {
+  margin-top: 0;
+}
+
+.footer-bottom,
+.footer-inner {
+  max-width: var(--site-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-bottom {
+  gap: 18px;
+}
+
+.mobile-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.mobile-nav-toggle span {
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 999px;
+  position: relative;
+  transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+.mobile-nav-toggle span::before,
+.mobile-nav-toggle span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 999px;
+  transition: transform var(--transition-base), top var(--transition-base);
+}
+
+.mobile-nav-toggle span::before {
+  top: -6px;
+}
+
+.mobile-nav-toggle span::after {
+  top: 6px;
+}
+
+body.nav-open .mobile-nav-toggle span {
+  background: transparent;
+}
+
+body.nav-open .mobile-nav-toggle span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+body.nav-open .mobile-nav-toggle span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .mobile-nav-toggle {
+    display: inline-flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 20px;
+    right: 20px;
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 16px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: var(--shadow-card);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition:
+      opacity var(--transition-base),
+      transform var(--transition-base),
+      visibility var(--transition-base);
+  }
+
+  body.page-home .nav-links {
+    background: rgba(15, 26, 46, 0.95);
+  }
+
+  body.nav-open .nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  body.page-inner .nav-links a {
+    color: var(--navy);
+  }
+
+  body.page-home .nav-links a {
+    color: var(--white);
+  }
+
+  .hero-content {
+    padding-top: 140px;
+  }
+
+  .services,
+  .projects,
+  .article,
+  .page-hero {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body.js-enhanced .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+  }
+}
