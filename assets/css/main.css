@@ -285,6 +285,29 @@ body.js-enhanced .reveal-on-scroll.is-visible {
   transform: translateX(4px);
 }
 
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-link::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  background: currentColor;
+  mask: url("../icons/arrow-circle-right.svg") center / contain no-repeat;
+  -webkit-mask: url("../icons/arrow-circle-right.svg") center / contain no-repeat;
+  transform: translateX(-2px);
+  transition: transform var(--transition-base);
+}
+
+.project-card:hover .card-link::before,
+.project-card:focus-visible .card-link::before {
+  transform: translateX(2px);
+}
+
 .page-hero,
 .stats {
   background-image:
@@ -792,13 +815,25 @@ body.nav-open .mobile-nav-toggle span::after {
   color: var(--lime-hover);
 }
 
+.inline-link {
+  gap: 10px;
+}
+
 .inline-link::after {
-  content: "→";
+  content: "";
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  background: currentColor;
+  mask: url("../icons/arrow-circle-right.svg") center / contain no-repeat;
+  -webkit-mask: url("../icons/arrow-circle-right.svg") center / contain no-repeat;
+  transform: translateX(-2px);
   transition: transform var(--transition-base);
 }
 
-.inline-link:hover::after {
-  transform: translateX(4px);
+.inline-link:hover::after,
+.inline-link:focus-visible::after {
+  transform: translateX(2px);
 }
 
 .quote-card {
