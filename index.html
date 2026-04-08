@@ -687,25 +687,6 @@
     font-size: 11px;
     font-weight: 700;
   }
-  .operation-flow {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: auto;
-    align-self: center;
-    color: rgba(26,39,68,0.44);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .operation-flow::before,
-  .operation-flow::after {
-    content: "";
-    width: 44px;
-    height: 1px;
-    background: currentColor;
-  }
   .operation-body {
     padding: 24px 24px 26px;
   }
@@ -843,11 +824,20 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    padding: 58px 52px 54px;
+    padding: 52px 52px 54px;
     display: flex;
     flex-direction: column;
     min-height: 560px;
-    justify-content: end;
+    justify-content: center;
+  }
+  .testimonial-content {
+    width: min(100%, 920px);
+    padding: 42px 42px 32px;
+    border-radius: 30px;
+    background: linear-gradient(180deg, rgba(17,29,49,0.14) 0%, rgba(17,29,49,0.36) 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 28px 60px rgba(9,18,34,0.18);
+    backdrop-filter: blur(8px);
   }
   .testimonial-badge {
     position: absolute;
@@ -869,14 +859,15 @@
     box-shadow: 0 16px 28px rgba(168,212,36,0.24);
   }
   .testimonial-quote {
-    max-width: 920px;
+    max-width: 760px;
     font-family: 'Montserrat', sans-serif;
-    font-size: clamp(28px, 4vw, 54px);
-    line-height: 1.22;
+    font-size: clamp(24px, 3.6vw, 46px);
+    line-height: 1.2;
     color: var(--white);
     font-weight: 800;
     letter-spacing: -0.03em;
-    margin-bottom: 34px;
+    text-wrap: balance;
+    margin-bottom: 30px;
   }
   .testimonial-meta {
     display: flex;
@@ -884,7 +875,7 @@
     gap: 16px;
     align-items: center;
     color: rgba(255,255,255,0.88);
-    margin-bottom: 52px;
+    margin-bottom: 32px;
   }
   .testimonial-name {
     font-family: 'Montserrat', sans-serif;
@@ -925,7 +916,7 @@
   .testimonial-dots {
     display: flex;
     gap: 10px;
-    margin-top: 18px;
+    margin-top: 16px;
   }
   .testimonial-dot {
     width: 10px;
@@ -1112,14 +1103,15 @@
     .testimonials-stage,
     .testimonial-inner { min-height: 480px; }
     .testimonial-inner { padding: 42px 24px 34px; }
+    .testimonial-content { padding: 30px 24px 24px; border-radius: 24px; }
     .testimonial-badge {
       right: 14px;
       width: 58px;
       height: 58px;
       font-size: 44px;
     }
-    .testimonial-quote { font-size: 34px; margin-bottom: 24px; }
-    .testimonial-meta { margin-bottom: 34px; gap: 10px; }
+    .testimonial-quote { font-size: clamp(22px, 7vw, 34px); margin-bottom: 24px; }
+    .testimonial-meta { margin-bottom: 28px; gap: 10px; }
     .testimonial-name,
     .testimonial-role { font-size: 13px; }
     .about { padding: 60px 20px; }
@@ -1224,8 +1216,8 @@
       <div class="operations-header">
         <div class="operations-copy">
           <span class="operations-kicker">Waar Synergo aan werkt</span>
-          <h2>Van fabriekstransitie tot technische realisatie</h2>
-          <p>Een greep uit de werkzaamheden waarin Synergo dagelijks waarde toevoegt voor foodbedrijven: van haalbaarheid en engineering tot uitvoering, opschaling en continuiteit in productie.</p>
+          <h2>Van fabriekstransitie tot toekomstbestendige foodproductie</h2>
+          <p>Synergo helpt foodbedrijven om slimmer te investeren, gecontroleerd te veranderen en futureproof te groeien. Van eerste haalbaarheidsvraag tot realisatie zorgen wij dat techniek, productie en ambitie op elkaar aansluiten.</p>
         </div>
       </div>
 
@@ -1238,23 +1230,22 @@
               <div class="operation-visual">
                 <div class="operation-label"><span>01</span> Haalbaarheidsstudies</div>
                 <div class="operation-panel">
-                  <strong>Van eerste vraag naar scherpe scenario’s</strong>
+                  <strong>Voorkom dure missers en kies direct de juiste route</strong>
                   <div class="operation-chip-row">
                     <span class="operation-chip">Capaciteit</span>
                     <span class="operation-chip">Routing</span>
                     <span class="operation-chip">Investering</span>
                   </div>
-                  <p>We toetsen technische, ruimtelijke en financiële haalbaarheid voordat er gebouwd of verplaatst wordt.</p>
+                  <p>We maken snel inzichtelijk welke oplossing technisch, ruimtelijk en financieel het meest toekomstbestendig is.</p>
                 </div>
-                <div class="operation-flow">Analyse • Richting • Besluit</div>
               </div>
               <div class="operation-body">
-                <h3>Een sterke start voor complexe foodprojecten</h3>
-                <p>Synergo helpt bedrijven om vroeg de juiste keuzes te maken, zodat investeringen, productiestromen en uitbreidingsplannen kloppen voordat een project de uitvoeringsfase in gaat.</p>
+                <h3>Zeker investeren begint met de juiste keuzes vooraf</h3>
+                <p>Synergo brengt kansen, risico's en randvoorwaarden vroeg in beeld. Zo investeert u met vertrouwen in een oplossing die vandaag werkt en morgen nog steeds klopt.</p>
                 <ul class="operation-points">
-                  <li>Technische scenariovergelijking en ruimtelijke verkenning</li>
-                  <li>Onderbouwing voor uitbreiding, nieuwbouw of relocatie</li>
-                  <li>Heldere vertaalslag van ambitie naar realiseerbare route</li>
+                  <li>Sneller duidelijkheid over de beste route voor uitbreiding, nieuwbouw of verhuizing</li>
+                  <li>Minder faalkosten door scherpe toetsing van capaciteit, routing en investeringen</li>
+                  <li>Een realistisch plan dat meegroeit met uw toekomstige productieambities</li>
                 </ul>
               </div>
             </article>
@@ -1263,23 +1254,22 @@
               <div class="operation-visual">
                 <div class="operation-label"><span>02</span> Engineering</div>
                 <div class="operation-panel">
-                  <strong>Ontwerpen die productie echt ondersteunen</strong>
+                  <strong>Ontwerpen die vandaag werken en morgen niet in de weg zitten</strong>
                   <div class="operation-chip-row">
                     <span class="operation-chip">Lay-out</span>
                     <span class="operation-chip">Utilities</span>
                     <span class="operation-chip">Integratie</span>
                   </div>
-                  <p>Van detailengineering tot afstemming tussen disciplines en leveranciers in de foodomgeving.</p>
+                  <p>We vertalen productieambities naar een slim ontwerp waarin techniek, hygiene, veiligheid en groei samenkomen.</p>
                 </div>
-                <div class="operation-flow">Proces • Installatie • Samenhang</div>
               </div>
               <div class="operation-body">
-                <h3>Engineering met gevoel voor foodprocessing</h3>
-                <p>Niet alleen technisch correct, maar ook slim ingepast in logistiek, hygiëne, veiligheid en toekomstige groei. Dat maakt engineering bij Synergo praktisch en direct toepasbaar.</p>
+                <h3>Engineering die uw fabriek futureproof maakt</h3>
+                <p>Synergo ontwerpt niet alleen technisch correct, maar vooral praktisch, schaalbaar en slim ingepast in uw operatie. Daardoor krijgt u een fabriek die beter presteert en klaar is voor verandering.</p>
                 <ul class="operation-points">
-                  <li>Vertaling van productieproces naar uitvoerbaar ontwerp</li>
-                  <li>Afstemming tussen bouw, techniek en operationele eisen</li>
-                  <li>Grip op interfaces tussen bestaande en nieuwe installaties</li>
+                  <li>Een ontwerp dat productie, logistiek en utilities beter op elkaar laat aansluiten</li>
+                  <li>Minder knelpunten door strakke afstemming tussen bouw, techniek en operatie</li>
+                  <li>Technische keuzes die ruimte laten voor toekomstige uitbreiding en optimalisatie</li>
                 </ul>
               </div>
             </article>
@@ -1288,23 +1278,22 @@
               <div class="operation-visual">
                 <div class="operation-label"><span>03</span> Factory transition engineering</div>
                 <div class="operation-panel">
-                  <strong>Veranderen zonder onnodige productiedruk</strong>
+                  <strong>Verbouw, verhuis of schaal op zonder uw productie te verliezen</strong>
                   <div class="operation-chip-row">
                     <span class="operation-chip">Fasering</span>
                     <span class="operation-chip">Omgeving</span>
-                    <span class="operation-chip">Continuïteit</span>
+                    <span class="operation-chip">Continuiteit</span>
                   </div>
-                  <p>Bij verbouw, verplaatsing of transitie houden we oog op wat tijdens de verandering door moet blijven draaien.</p>
+                  <p>We organiseren verandering zo dat productie, veiligheid en voortgang beheersbaar blijven tijdens elke fase van de transitie.</p>
                 </div>
-                <div class="operation-flow">Faseer • Verbind • Beheers</div>
               </div>
               <div class="operation-body">
-                <h3>De brug tussen bestaande fabriek en nieuwe situatie</h3>
-                <p>Juist in foodprojecten zit de uitdaging vaak in de overgang. Synergo organiseert die transitie met een plan dat risico’s verlaagt en productiebelangen bewaakt.</p>
+                <h3>De partij voor gecontroleerde fabriekstransities</h3>
+                <p>Hier maakt Synergo echt het verschil. We overbruggen de complexe overgang van bestaand naar nieuw, met grip op productiecontinuiteit, risico's en planning.</p>
                 <ul class="operation-points">
-                  <li>Faseringsplannen voor verbouwingen in operationele omgevingen</li>
-                  <li>Coördinatie tussen productie, techniek en uitvoering</li>
-                  <li>Risicobeheersing rondom stopmomenten en omschakelingen</li>
+                  <li>Minder productiedruk door slimme fasering en realistische omschakelmomenten</li>
+                  <li>Een partner die productie, techniek en uitvoering strak op elkaar afstemt</li>
+                  <li>Meer zekerheid tijdens verandering in een omgeving waar stilstand direct geld kost</li>
                 </ul>
               </div>
             </article>
@@ -1313,48 +1302,46 @@
               <div class="operation-visual">
                 <div class="operation-label"><span>04</span> Projectmanagement</div>
                 <div class="operation-panel">
-                  <strong>Van plan naar realisatie op tempo en samenhang</strong>
+                  <strong>Houd tempo, overzicht en grip in elk projectstadium</strong>
                   <div class="operation-chip-row">
                     <span class="operation-chip">Planning</span>
                     <span class="operation-chip">Stakeholders</span>
                     <span class="operation-chip">Voortgang</span>
                   </div>
-                  <p>Succesvolle uitvoering vraagt om sturing, communicatie en overzicht tussen alle betrokken partijen.</p>
+                  <p>Wij zorgen voor sturing en samenhang tussen alle betrokken partijen, zodat besluiten sneller genomen worden en projecten niet vastlopen.</p>
                 </div>
-                <div class="operation-flow">Stuur • Koppel • Lever</div>
               </div>
               <div class="operation-body">
-                <h3>Projecten leiden met verbindingskracht</h3>
-                <p>Synergo bewaakt planning, scope en samenwerking. Daardoor blijven technische trajecten in beweging en houden opdrachtgevers overzicht in besluitvorming en voortgang.</p>
+                <h3>Projectmanagement dat rust geeft en resultaten versnelt</h3>
+                <p>Synergo bewaakt planning, scope, voortgang en samenwerking. Daardoor houdt u overzicht, blijven stakeholders aangehaakt en komt realisatie dichterbij zonder onnodige ruis.</p>
                 <ul class="operation-points">
-                  <li>Projectsturing vanaf initiatief tot oplevering</li>
-                  <li>Bewaking van planning, budget en mijlpalen</li>
-                  <li>Strakke communicatie tussen interne teams en leveranciers</li>
+                  <li>Een duidelijk aanspreekpunt dat stuurt op voortgang, besluiten en resultaat</li>
+                  <li>Minder vertraging door strakke bewaking van planning, budget en mijlpalen</li>
+                  <li>Betere samenwerking tussen interne teams, leveranciers en uitvoering</li>
                 </ul>
               </div>
             </article>
 
             <article class="operation-slide" data-carousel-slide data-theme="continuity">
               <div class="operation-visual">
-                <div class="operation-label"><span>05</span> Uitbreiding en continuïteit</div>
+                <div class="operation-label"><span>05</span> Uitbreiding en continuiteit</div>
                 <div class="operation-panel">
-                  <strong>Opschalen zonder grip te verliezen</strong>
+                  <strong>Groei door zonder nieuwe bottlenecks te bouwen</strong>
                   <div class="operation-chip-row">
                     <span class="operation-chip">Groei</span>
                     <span class="operation-chip">Bottlenecks</span>
-                    <span class="operation-chip">Toekomstvast</span>
+                    <span class="operation-chip">Futureproof</span>
                   </div>
-                  <p>Bij uitbreiding kijkt Synergo verder dan extra meters of machines: het hele systeem moet blijven werken.</p>
+                  <p>We kijken verder dan extra meters of machines en zorgen dat uw complete productiesysteem sterker uit de uitbreiding komt.</p>
                 </div>
-                <div class="operation-flow">Schaal op • Ontknoop • Borg</div>
               </div>
               <div class="operation-body">
-                <h3>Ruimte maken voor groei in foodproductie</h3>
-                <p>Groei betekent meer dan capaciteit toevoegen. We kijken naar bottlenecks, routing, utilities en samenhang, zodat uitbreiding ook op lange termijn werkt.</p>
+                <h3>Uitbreiden met een fabriek die klaar is voor de volgende stap</h3>
+                <p>Synergo helpt u groeien zonder grip te verliezen. We ontwerpen uitbreiding zo dat capaciteit, routing, utilities en organisatie ook op langere termijn in balans blijven.</p>
                 <ul class="operation-points">
-                  <li>Herinrichting van processen en lay-outs voor extra output</li>
-                  <li>Voorkomen van nieuwe knelpunten na uitbreiding</li>
-                  <li>Technische keuzes die meegroeien met toekomstige vraag</li>
+                  <li>Meer output zonder dat nieuwe knelpunten de winst meteen weer opeten</li>
+                  <li>Herinrichting van processen en lay-outs met oog voor continuiteit en schaalbaarheid</li>
+                  <li>Een futureproof fabriek die meebeweegt met vraag, assortiment en techniek</li>
                 </ul>
               </div>
             </article>
@@ -1407,45 +1394,51 @@
         <article class="testimonial-slide is-active" data-testimonial-slide data-theme="pomuni">
           <div class="testimonial-inner">
             <div class="testimonial-badge">&ldquo;</div>
-            <blockquote class="testimonial-quote">"Synergo heeft ons goed geholpen bij het uitwerken en uittekenen van managementtools. Ze zijn vastberaden, enthousiast en betrouwbaar."</blockquote>
-            <div class="testimonial-meta">
-              <span class="testimonial-name">Bart Muyshondt</span>
-              <span class="testimonial-role">Managing Director Pomuni</span>
+            <div class="testimonial-content">
+              <blockquote class="testimonial-quote">"Synergo heeft ons goed geholpen bij het uitwerken en uittekenen van managementtools. Ze zijn vastberaden, enthousiast en betrouwbaar."</blockquote>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">Bart Muyshondt</span>
+                <span class="testimonial-role">Managing Director Pomuni</span>
+              </div>
+              <div class="testimonial-progress">
+                <span class="testimonial-progress-bar is-animating" data-testimonial-progress></span>
+              </div>
+              <div class="testimonial-dots" data-testimonial-dots></div>
             </div>
-            <div class="testimonial-progress">
-              <span class="testimonial-progress-bar is-animating" data-testimonial-progress></span>
-            </div>
-            <div class="testimonial-dots" data-testimonial-dots></div>
           </div>
         </article>
 
         <article class="testimonial-slide" data-testimonial-slide data-theme="vanderkroon">
           <div class="testimonial-inner">
             <div class="testimonial-badge">&ldquo;</div>
-            <blockquote class="testimonial-quote">"De adviseurs en engineers gaan pragmatisch te werk en het kennisniveau is hoog. Onze productielijn is nu nog efficiënter!"</blockquote>
-            <div class="testimonial-meta">
-              <span class="testimonial-name">Dennis van der Kroon</span>
-              <span class="testimonial-role">Directeur Van der Kroon Food Products</span>
+            <div class="testimonial-content">
+              <blockquote class="testimonial-quote">"De adviseurs en engineers gaan pragmatisch te werk en het kennisniveau is hoog. Onze productielijn is nu nog efficiënter!"</blockquote>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">Dennis van der Kroon</span>
+                <span class="testimonial-role">Directeur Van der Kroon Food Products</span>
+              </div>
+              <div class="testimonial-progress">
+                <span class="testimonial-progress-bar" data-testimonial-progress></span>
+              </div>
+              <div class="testimonial-dots" data-testimonial-dots></div>
             </div>
-            <div class="testimonial-progress">
-              <span class="testimonial-progress-bar" data-testimonial-progress></span>
-            </div>
-            <div class="testimonial-dots" data-testimonial-dots></div>
           </div>
         </article>
 
         <article class="testimonial-slide" data-testimonial-slide data-theme="zeelandia">
           <div class="testimonial-inner">
             <div class="testimonial-badge">&ldquo;</div>
-            <blockquote class="testimonial-quote">"Synergo adviseert ons op het gebied van explosieveiligheid. Ze zijn hierin praktisch zeer bekwaam en het kennisniveau is hoog. Het is makkelijk schakelen."</blockquote>
-            <div class="testimonial-meta">
-              <span class="testimonial-name">Kees Toutenhoofd</span>
-              <span class="testimonial-role">Safety Officer Zeelandia</span>
+            <div class="testimonial-content">
+              <blockquote class="testimonial-quote">"Synergo adviseert ons op het gebied van explosieveiligheid. Ze zijn hierin praktisch zeer bekwaam en het kennisniveau is hoog. Het is makkelijk schakelen."</blockquote>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">Kees Toutenhoofd</span>
+                <span class="testimonial-role">Safety Officer Zeelandia</span>
+              </div>
+              <div class="testimonial-progress">
+                <span class="testimonial-progress-bar" data-testimonial-progress></span>
+              </div>
+              <div class="testimonial-dots" data-testimonial-dots></div>
             </div>
-            <div class="testimonial-progress">
-              <span class="testimonial-progress-bar" data-testimonial-progress></span>
-            </div>
-            <div class="testimonial-dots" data-testimonial-dots></div>
           </div>
         </article>
       </div>

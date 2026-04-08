@@ -263,59 +263,90 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (operationsCarousel) {
     const track = operationsCarousel.querySelector("[data-carousel-track]");
-    const slides = Array.from(operationsCarousel.querySelectorAll("[data-carousel-slide]"));
+    const viewport = operationsCarousel.querySelector(".operations-viewport");
+    const originalSlides = Array.from(operationsCarousel.querySelectorAll("[data-carousel-slide]"));
     const dotsContainer = operationsCarousel.querySelector("[data-carousel-dots]");
     const prevButton = operationsCarousel.querySelector("[data-carousel-prev]");
     const nextButton = operationsCarousel.querySelector("[data-carousel-next]");
+    let renderedSlides = [];
     let activeIndex = 0;
     let autoPlayId;
+    let resetPending = false;
 
-    if (track && slides.length) {
-      const visibleSlides = () => (window.innerWidth <= 768 ? 1 : 3);
-      const centerOffset = () => Math.floor((visibleSlides() - 1) / 2);
-      const maxIndex = () => Math.max(0, slides.length - visibleSlides());
-      const highlightedIndex = () => Math.min(activeIndex + centerOffset(), slides.length - 1);
+    if (track && viewport && originalSlides.length) {
+      const cloneSlides = () => {
+        track.innerHTML = "";
+        const prependClones = originalSlides.map((slide) => {
+          const clone = slide.cloneNode(true);
+          clone.setAttribute("data-carousel-clone", "true");
+          return clone;
+        });
+        const appendClones = originalSlides.map((slide) => {
+          const clone = slide.cloneNode(true);
+          clone.setAttribute("data-carousel-clone", "true");
+          return clone;
+        });
 
-      const dots = slides.map((_, index) => {
+        [...prependClones, ...originalSlides, ...appendClones].forEach((slide) => {
+          track.appendChild(slide);
+        });
+
+        renderedSlides = Array.from(track.children);
+      };
+
+      const getRealIndex = (index = activeIndex) => {
+        return ((index - originalSlides.length) % originalSlides.length + originalSlides.length) % originalSlides.length;
+      };
+
+      const dots = originalSlides.map((_, index) => {
         const dot = document.createElement("button");
         dot.className = "operations-dot";
         dot.type = "button";
         dot.setAttribute("aria-label", `Ga naar kaart ${index + 1}`);
         dot.addEventListener("click", () => {
-          setActiveSlide(index - centerOffset());
+          setActiveSlide(originalSlides.length + index);
           restartAutoPlay();
         });
         dotsContainer?.appendChild(dot);
         return dot;
       });
 
-      const slideStep = () => {
-        if (slides.length < 2) {
-          return 0;
+      const updateTrackPosition = (useTransition = true) => {
+        const activeSlide = renderedSlides[activeIndex];
+        if (!activeSlide) {
+          return;
         }
 
-        return slides[1].offsetLeft - slides[0].offsetLeft;
+        track.style.transition = useTransition ? "" : "none";
+        const slideCenter = activeSlide.offsetLeft + (activeSlide.offsetWidth / 2);
+        const viewportCenter = viewport.offsetWidth / 2;
+        track.style.transform = `translateX(-${Math.max(0, slideCenter - viewportCenter)}px)`;
+
+        if (!useTransition) {
+          void track.offsetWidth;
+          track.style.transition = "";
+        }
       };
 
       const setActiveSlide = (index) => {
-        activeIndex = Math.max(0, Math.min(index, maxIndex()));
-        track.style.transform = `translateX(-${activeIndex * slideStep()}px)`;
+        activeIndex = index;
+        updateTrackPosition(!resetPending);
 
-        slides.forEach((slide, slideIndex) => {
-          slide.classList.toggle("is-active", slideIndex === highlightedIndex());
+        renderedSlides.forEach((slide, slideIndex) => {
+          slide.classList.toggle("is-active", slideIndex === activeIndex);
         });
 
         dots.forEach((dot, dotIndex) => {
-          dot.classList.toggle("is-active", dotIndex === highlightedIndex());
+          dot.classList.toggle("is-active", dotIndex === getRealIndex());
         });
       };
 
       const goToNext = () => {
-        setActiveSlide(activeIndex >= maxIndex() ? 0 : activeIndex + 1);
+        setActiveSlide(activeIndex + 1);
       };
 
       const goToPrevious = () => {
-        setActiveSlide(activeIndex <= 0 ? maxIndex() : activeIndex - 1);
+        setActiveSlide(activeIndex - 1);
       };
 
       const stopAutoPlay = () => {
@@ -326,7 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const startAutoPlay = () => {
         stopAutoPlay();
-        if (slides.length <= visibleSlides()) {
+        if (originalSlides.length <= 1) {
           return;
         }
 
@@ -350,12 +381,29 @@ document.addEventListener("DOMContentLoaded", () => {
       operationsCarousel.addEventListener("mouseenter", stopAutoPlay);
       operationsCarousel.addEventListener("mouseleave", startAutoPlay);
 
+      track.addEventListener("transitionend", () => {
+        if (activeIndex >= originalSlides.length * 2) {
+          resetPending = true;
+          setActiveSlide(activeIndex - originalSlides.length);
+          resetPending = false;
+        } else if (activeIndex < originalSlides.length) {
+          resetPending = true;
+          setActiveSlide(activeIndex + originalSlides.length);
+          resetPending = false;
+        }
+      });
+
       window.addEventListener("resize", () => {
+        const currentRealIndex = getRealIndex();
+        cloneSlides();
+        activeIndex = originalSlides.length + currentRealIndex;
         setActiveSlide(activeIndex);
         startAutoPlay();
       });
 
-      setActiveSlide(0);
+      cloneSlides();
+      activeIndex = originalSlides.length;
+      setActiveSlide(activeIndex);
       startAutoPlay();
     }
   }
