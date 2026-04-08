@@ -2,11 +2,52 @@ document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
   const nav = document.querySelector("nav");
   const navLinks = document.querySelector(".nav-links");
+  const submenuConfig = {
+    "wat-we-doen.html": [
+      { href: "wat-we-doen.html#consultancy", label: "Consultancy" },
+      { href: "wat-we-doen.html#engineering", label: "Engineering" },
+      { href: "wat-we-doen.html#projectmanagement", label: "Projectmanagement" },
+    ],
+    "over-synergo.html": [
+      { href: "over-synergo.html", label: "Over Synergo" },
+      { href: "projecten.html", label: "Projecten" },
+      { href: "actueel.html", label: "Actueel" },
+      { href: "contact.html", label: "Contact" },
+    ],
+    "werken-bij.html": [
+      { href: "werken-bij.html#vacatures", label: "Vacatures" },
+      { href: "werken-bij.html", label: "Werken bij Synergo" },
+      { href: "contact.html", label: "Open sollicitatie" },
+    ],
+  };
 
   body.classList.add("js-enhanced");
   body.classList.add(document.querySelector(".hero") ? "page-home" : "page-inner");
 
   if (nav && navLinks) {
+    navLinks.querySelectorAll("a.has-dropdown").forEach((link) => {
+      const menuItems = submenuConfig[link.getAttribute("href")];
+      const parentItem = link.closest("li");
+
+      if (!menuItems || !parentItem || parentItem.querySelector(".nav-dropdown")) {
+        return;
+      }
+
+      parentItem.classList.add("has-submenu");
+
+      const dropdown = document.createElement("div");
+      dropdown.className = "nav-dropdown";
+
+      menuItems.forEach((item) => {
+        const dropdownLink = document.createElement("a");
+        dropdownLink.href = item.href;
+        dropdownLink.textContent = item.label;
+        dropdown.appendChild(dropdownLink);
+      });
+
+      parentItem.appendChild(dropdown);
+    });
+
     const toggle = document.createElement("button");
     toggle.className = "mobile-nav-toggle";
     toggle.type = "button";
@@ -25,13 +66,44 @@ document.addEventListener("DOMContentLoaded", () => {
       toggle.setAttribute("aria-expanded", String(isOpen));
     });
 
+    navLinks.querySelectorAll("li.has-submenu > a.has-dropdown").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (window.innerWidth > 768) {
+          return;
+        }
+
+        event.preventDefault();
+        const parentItem = link.closest("li.has-submenu");
+
+        navLinks.querySelectorAll("li.has-submenu").forEach((item) => {
+          if (item !== parentItem) {
+            item.classList.remove("submenu-open");
+          }
+        });
+
+        parentItem?.classList.toggle("submenu-open");
+      });
+    });
+
     navLinks.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", closeNav);
+      link.addEventListener("click", () => {
+        if (
+          window.innerWidth <= 768 &&
+          link.matches("li.has-submenu > a.has-dropdown, .has-submenu > a.has-dropdown")
+        ) {
+          return;
+        }
+
+        closeNav();
+      });
     });
 
     window.addEventListener("resize", () => {
       if (window.innerWidth > 768) {
         closeNav();
+        navLinks.querySelectorAll(".submenu-open").forEach((item) => {
+          item.classList.remove("submenu-open");
+        });
       }
     });
   }
