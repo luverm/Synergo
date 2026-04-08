@@ -109,6 +109,13 @@ button {
 }
 
 nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 220;
+  isolation: isolate;
   transition:
     background-color var(--transition-base),
     box-shadow var(--transition-base),
@@ -117,26 +124,36 @@ nav {
 }
 
 body.js-enhanced nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  z-index: 220;
-  will-change: transform, background-color, box-shadow;
+  will-change: background-color, box-shadow;
 }
 
-body.page-inner {
-  padding-top: 84px;
+nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15, 26, 46, 0.46) 0%,
+      rgba(15, 26, 46, 0.28) 54%,
+      rgba(15, 26, 46, 0.08) 100%
+    );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.48) 72%, rgba(0, 0, 0, 0.14) 100%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.48) 72%, rgba(0, 0, 0, 0.14) 100%);
 }
 
-body.nav-hidden nav {
-  transform: translateY(calc(-100% - 14px));
-}
-
-body.nav-open nav,
-body.intro-active nav {
-  transform: translateY(0);
+body.page-inner nav::before {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.88) 0%,
+      rgba(255, 255, 255, 0.72) 54%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
 }
 
 body.scrolled nav {
@@ -186,6 +203,7 @@ body.page-inner.scrolled nav {
 
 .nav-links a {
   position: relative;
+  text-shadow: 0 1px 10px rgba(15, 26, 46, 0.24);
 }
 
 .nav-links li {
@@ -585,10 +603,6 @@ body.nav-open .mobile-nav-toggle span::after {
 }
 
 @media (max-width: 768px) {
-  body.page-inner {
-    padding-top: 72px;
-  }
-
   .mobile-nav-toggle {
     display: inline-flex;
   }
