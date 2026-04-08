@@ -87,4 +87,65 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     revealElements.forEach((element) => element.classList.add("is-visible"));
   }
+
+  const filterForm = document.querySelector("[data-project-filters]");
+  const projectCards = Array.from(document.querySelectorAll(".project-card[data-type]"));
+
+  if (filterForm && projectCards.length) {
+    const filterControls = Array.from(filterForm.querySelectorAll("[data-filter-control]"));
+    const countElement = document.querySelector("[data-project-count]");
+    const resetButton = document.querySelector("[data-filter-reset]");
+    const emptyState = document.querySelector("[data-project-empty]");
+
+    const getTokens = (value) =>
+      (value || "")
+        .split(",")
+        .map((token) => token.trim())
+        .filter(Boolean);
+
+    const applyProjectFilters = () => {
+      const filters = Object.fromEntries(
+        filterControls.map((control) => [control.name, control.value.trim()])
+      );
+
+      let visibleCount = 0;
+
+      projectCards.forEach((card) => {
+        const matches = Object.entries(filters).every(([key, selectedValue]) => {
+          if (!selectedValue) {
+            return true;
+          }
+
+          return getTokens(card.dataset[key]).includes(selectedValue);
+        });
+
+        card.classList.toggle("is-hidden", !matches);
+
+        if (matches) {
+          visibleCount += 1;
+        }
+      });
+
+      if (countElement) {
+        countElement.textContent = `${visibleCount} project${visibleCount === 1 ? "" : "en"}`;
+      }
+
+      if (emptyState) {
+        emptyState.classList.toggle("is-visible", visibleCount === 0);
+      }
+    };
+
+    filterControls.forEach((control) => {
+      control.addEventListener("change", applyProjectFilters);
+    });
+
+    if (resetButton) {
+      resetButton.addEventListener("click", () => {
+        filterForm.reset();
+        applyProjectFilters();
+      });
+    }
+
+    applyProjectFilters();
+  }
 });
