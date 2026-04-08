@@ -117,7 +117,17 @@ nav {
 }
 
 body.js-enhanced nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 220;
   will-change: transform, background-color, box-shadow;
+}
+
+body.page-inner {
+  padding-top: 84px;
 }
 
 body.nav-hidden nav {
@@ -575,6 +585,10 @@ body.nav-open .mobile-nav-toggle span::after {
 }
 
 @media (max-width: 768px) {
+  body.page-inner {
+    padding-top: 72px;
+  }
+
   .mobile-nav-toggle {
     display: inline-flex;
   }
