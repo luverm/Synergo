@@ -526,12 +526,9 @@
     line-height: 1.75;
     color: var(--text-muted);
   }
-  .operations-controls {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
   .operations-nav {
+    position: absolute;
+    top: 50%;
     width: 48px;
     height: 48px;
     border: 1px solid rgba(26,39,68,0.12);
@@ -540,15 +537,28 @@
     color: var(--navy);
     font-size: 20px;
     cursor: pointer;
-    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    z-index: 5;
+    transform: translateY(-50%);
+    box-shadow: 0 18px 36px rgba(15,26,46,0.12);
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
   }
   .operations-nav:hover {
-    transform: translateY(-2px);
+    transform: translateY(calc(-50% - 2px));
     border-color: rgba(168,212,36,0.55);
     background: var(--white);
+    box-shadow: 0 24px 40px rgba(15,26,46,0.16);
   }
   .operations-carousel {
     position: relative;
+    --operations-gap: 22px;
+    --operations-card-width: calc((100% - (var(--operations-gap) * 2)) / 3);
+    --operations-control-overhang: 24px;
+  }
+  .operations-nav[data-carousel-prev] {
+    left: calc(50% - (var(--operations-card-width) / 2) - var(--operations-control-overhang));
+  }
+  .operations-nav[data-carousel-next] {
+    right: calc(50% - (var(--operations-card-width) / 2) - var(--operations-control-overhang));
   }
   .operations-viewport {
     overflow: hidden;
@@ -556,7 +566,7 @@
   }
   .operations-track {
     display: flex;
-    gap: 22px;
+    gap: var(--operations-gap);
     transition: transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
     will-change: transform;
   }
@@ -1076,7 +1086,25 @@
     .operations-showcase { padding: 12px 20px 76px; }
     .operations-header,
     .operations-footer { flex-direction: column; align-items: flex-start; }
-    .operations-controls { align-self: stretch; justify-content: flex-end; }
+    .operations-carousel {
+      --operations-card-width: 100%;
+      --operations-control-overhang: 8px;
+    }
+    .operations-nav {
+      top: auto;
+      bottom: -8px;
+      transform: none;
+    }
+    .operations-nav:hover {
+      transform: translateY(-2px);
+    }
+    .operations-nav[data-carousel-prev] {
+      left: auto;
+      right: 64px;
+    }
+    .operations-nav[data-carousel-next] {
+      right: 8px;
+    }
     .operation-slide { flex-basis: 100%; }
     .operation-visual { min-height: 236px; }
     .operation-body h3 { font-size: 24px; }
@@ -1199,13 +1227,11 @@
           <h2>Van fabriekstransitie tot technische realisatie</h2>
           <p>Een greep uit de werkzaamheden waarin Synergo dagelijks waarde toevoegt voor foodbedrijven: van haalbaarheid en engineering tot uitvoering, opschaling en continuiteit in productie.</p>
         </div>
-        <div class="operations-controls">
-          <button class="operations-nav" type="button" data-carousel-prev aria-label="Vorige werkzaamheid">&larr;</button>
-          <button class="operations-nav" type="button" data-carousel-next aria-label="Volgende werkzaamheid">&rarr;</button>
-        </div>
       </div>
 
       <div class="operations-carousel" data-operations-carousel>
+        <button class="operations-nav" type="button" data-carousel-prev aria-label="Vorige werkzaamheid">&larr;</button>
+        <button class="operations-nav" type="button" data-carousel-next aria-label="Volgende werkzaamheid">&rarr;</button>
         <div class="operations-viewport">
           <div class="operations-track" data-carousel-track>
             <article class="operation-slide" data-carousel-slide data-theme="study">

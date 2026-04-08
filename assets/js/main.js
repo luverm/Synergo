@@ -271,21 +271,24 @@ document.addEventListener("DOMContentLoaded", () => {
     let autoPlayId;
 
     if (track && slides.length) {
+      const visibleSlides = () => (window.innerWidth <= 768 ? 1 : 3);
+      const centerOffset = () => Math.floor((visibleSlides() - 1) / 2);
+      const maxIndex = () => Math.max(0, slides.length - visibleSlides());
+      const highlightedIndex = () => Math.min(activeIndex + centerOffset(), slides.length - 1);
+
       const dots = slides.map((_, index) => {
         const dot = document.createElement("button");
         dot.className = "operations-dot";
         dot.type = "button";
         dot.setAttribute("aria-label", `Ga naar kaart ${index + 1}`);
         dot.addEventListener("click", () => {
-          setActiveSlide(index);
+          setActiveSlide(index - centerOffset());
           restartAutoPlay();
         });
         dotsContainer?.appendChild(dot);
         return dot;
       });
 
-      const visibleSlides = () => (window.innerWidth <= 768 ? 1 : 3);
-      const maxIndex = () => Math.max(0, slides.length - visibleSlides());
       const slideStep = () => {
         if (slides.length < 2) {
           return 0;
@@ -299,13 +302,11 @@ document.addEventListener("DOMContentLoaded", () => {
         track.style.transform = `translateX(-${activeIndex * slideStep()}px)`;
 
         slides.forEach((slide, slideIndex) => {
-          const centerOffset = Math.floor((visibleSlides() - 1) / 2);
-          const highlightedIndex = Math.min(activeIndex + centerOffset, slides.length - 1);
-          slide.classList.toggle("is-active", slideIndex === highlightedIndex);
+          slide.classList.toggle("is-active", slideIndex === highlightedIndex());
         });
 
         dots.forEach((dot, dotIndex) => {
-          dot.classList.toggle("is-active", dotIndex === activeIndex);
+          dot.classList.toggle("is-active", dotIndex === highlightedIndex());
         });
       };
 
