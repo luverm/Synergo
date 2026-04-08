@@ -109,7 +109,6 @@ button {
 }
 
 nav {
-  backdrop-filter: saturate(140%) blur(16px);
   transition:
     background-color var(--transition-base),
     box-shadow var(--transition-base),
@@ -121,20 +120,40 @@ body.js-enhanced nav {
   will-change: transform, background-color, box-shadow;
 }
 
+body.nav-hidden nav {
+  transform: translateY(calc(-100% - 14px));
+}
+
+body.nav-open nav,
+body.intro-active nav {
+  transform: translateY(0);
+}
+
 body.scrolled nav {
   box-shadow: var(--shadow-nav);
 }
 
 body.page-home.scrolled nav {
-  background: rgba(15, 26, 46, 0.82);
+  background: transparent;
 }
 
 body.page-inner.scrolled nav {
-  background: rgba(255, 255, 255, 0.92);
+  background: transparent;
 }
 
 .logo {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  overflow: visible;
+}
+
+.logo-icon {
+  display: block;
+  flex: 0 0 auto;
+  overflow: visible;
+  padding: 2px 0 4px;
+  box-sizing: content-box;
 }
 
 .logo::after {
@@ -203,9 +222,8 @@ body.page-inner.scrolled nav {
   padding: 12px;
   border: 1px solid rgba(26, 39, 68, 0.1);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.96);
+  background: #ffffff;
   box-shadow: 0 18px 42px rgba(15, 26, 46, 0.14);
-  backdrop-filter: blur(16px);
   opacity: 0;
   visibility: hidden;
   transform: translateY(8px) scale(0.98);

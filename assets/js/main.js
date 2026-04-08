@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
   const nav = document.querySelector("nav");
   const navLinks = document.querySelector(".nav-links");
+  let lastScrollY = window.scrollY;
   const submenuConfig = {
     "wat-we-doen.html": [
       { href: "wat-we-doen.html#consultancy", label: "Consultancy" },
@@ -96,11 +97,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const closeNav = () => {
       body.classList.remove("nav-open");
+      body.classList.remove("nav-hidden");
       toggle.setAttribute("aria-expanded", "false");
     };
 
     toggle.addEventListener("click", () => {
       const isOpen = body.classList.toggle("nav-open");
+      if (isOpen) {
+        body.classList.remove("nav-hidden");
+      }
       toggle.setAttribute("aria-expanded", String(isOpen));
     });
 
@@ -147,7 +152,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const onScroll = () => {
-    body.classList.toggle("scrolled", window.scrollY > 16);
+    const currentScrollY = window.scrollY;
+    const scrollDelta = currentScrollY - lastScrollY;
+    const hasPassedFold = currentScrollY > 140;
+    const shouldHideNav =
+      hasPassedFold &&
+      scrollDelta > 8 &&
+      !body.classList.contains("nav-open");
+
+    body.classList.toggle("scrolled", currentScrollY > 16);
+    body.classList.toggle("nav-hidden", shouldHideNav);
+
+    if (scrollDelta < -6 || currentScrollY <= 24) {
+      body.classList.remove("nav-hidden");
+    }
+
+    lastScrollY = currentScrollY;
   };
 
   onScroll();
