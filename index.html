@@ -762,6 +762,12 @@
     align-items: center;
     gap: 8px;
   }
+  .operations-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
   .operations-dot {
     width: 10px;
     height: 10px;
@@ -775,185 +781,10 @@
     background: var(--lime);
     transform: scale(1.25);
   }
-
-  .testimonials-showcase {
-    position: relative;
-    padding: 0 48px 96px;
-    background: var(--white);
-  }
-  .testimonials-shell {
-    max-width: 1180px;
-    margin: 0 auto;
-  }
-  .testimonials-stage {
-    position: relative;
-    min-height: 560px;
-    border-radius: 28px;
-    overflow: hidden;
-    box-shadow: 0 28px 70px rgba(15,26,46,0.16);
-  }
-  .testimonial-slide {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: end;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 700ms ease, visibility 700ms ease, transform 700ms ease;
-    transform: scale(1.02);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  .testimonial-slide.is-active {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-  }
-  .testimonial-slide::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(180deg, rgba(18,31,54,0.48) 0%, rgba(18,31,54,0.68) 48%, rgba(18,31,54,0.82) 100%);
-  }
-  .testimonial-slide[data-theme="pomuni"] {
-    background:
-      linear-gradient(180deg, rgba(18,31,54,0.1), rgba(18,31,54,0.1)),
-      radial-gradient(circle at 18% 22%, rgba(199,170,124,0.92) 0 10%, transparent 11%),
-      radial-gradient(circle at 36% 18%, rgba(189,160,116,0.9) 0 9%, transparent 10%),
-      radial-gradient(circle at 54% 26%, rgba(210,183,136,0.88) 0 11%, transparent 12%),
-      radial-gradient(circle at 72% 20%, rgba(196,168,122,0.9) 0 10%, transparent 11%),
-      radial-gradient(circle at 84% 34%, rgba(184,156,114,0.86) 0 9%, transparent 10%),
-      radial-gradient(circle at 18% 58%, rgba(198,170,126,0.9) 0 12%, transparent 13%),
-      radial-gradient(circle at 42% 60%, rgba(182,153,112,0.88) 0 10%, transparent 11%),
-      radial-gradient(circle at 64% 62%, rgba(205,178,132,0.9) 0 11%, transparent 12%),
-      radial-gradient(circle at 84% 68%, rgba(191,164,121,0.9) 0 10%, transparent 11%),
-      linear-gradient(135deg, #5f4b36 0%, #78614a 30%, #907555 62%, #70573d 100%);
-  }
-  .testimonial-slide[data-theme="vanderkroon"] {
-    background-image: url('https://synergo.com/wp-content/uploads/2019/07/DSC_4660a.jpg');
-  }
-  .testimonial-slide[data-theme="zeelandia"] {
-    background:
-      linear-gradient(180deg, rgba(18,31,54,0.14), rgba(18,31,54,0.14)),
-      radial-gradient(circle at 82% 72%, rgba(206,189,150,0.78) 0 11%, transparent 12%),
-      radial-gradient(circle at 75% 84%, rgba(212,197,161,0.84) 0 8%, transparent 9%),
-      radial-gradient(circle at 18% 16%, rgba(216,206,176,0.2) 0 2%, transparent 2.5%),
-      radial-gradient(circle at 28% 34%, rgba(216,206,176,0.18) 0 1.8%, transparent 2.3%),
-      radial-gradient(circle at 12% 76%, rgba(216,206,176,0.2) 0 1.8%, transparent 2.4%),
-      linear-gradient(140deg, #4b5560 0%, #77818d 38%, #9ba5af 72%, #c2c9cf 100%);
-  }
-  .testimonial-inner {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    padding: 52px 52px 54px;
-    display: flex;
-    flex-direction: column;
-    min-height: 560px;
-    justify-content: center;
-  }
-  .testimonial-content {
-    width: min(100%, 920px);
-    padding: 42px 42px 32px;
-    border-radius: 30px;
-    background: linear-gradient(180deg, rgba(17,29,49,0.14) 0%, rgba(17,29,49,0.36) 100%);
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 28px 60px rgba(9,18,34,0.18);
-    backdrop-filter: blur(8px);
-  }
-  .testimonial-badge {
-    position: absolute;
-    top: 0;
-    right: 22px;
-    width: 74px;
-    height: 74px;
-    background: var(--lime);
-    color: var(--white);
-    border-radius: 0 0 18px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 58px;
-    font-weight: 800;
-    line-height: 1;
-    transform: rotate(12deg) translateY(-8px);
-    box-shadow: 0 16px 28px rgba(168,212,36,0.24);
-  }
-  .testimonial-quote {
-    max-width: 760px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(24px, 3.6vw, 46px);
-    line-height: 1.2;
-    color: var(--white);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-    margin-bottom: 30px;
-  }
-  .testimonial-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    align-items: center;
-    color: rgba(255,255,255,0.88);
-    margin-bottom: 32px;
-  }
-  .testimonial-name {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-    font-size: 16px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-  .testimonial-role {
-    font-size: 15px;
+  .operations-note {
+    font-size: 12px;
     line-height: 1.5;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: rgba(255,255,255,0.72);
-  }
-  .testimonial-progress {
-    position: relative;
-    width: 100%;
-    height: 5px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.3);
-    overflow: hidden;
-  }
-  .testimonial-progress-bar {
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 0;
-    background: linear-gradient(90deg, #b8f085 0%, #8fe3f2 100%);
-    border-radius: inherit;
-  }
-  .testimonial-progress-bar.is-animating {
-    animation: testimonialProgress 6.2s linear forwards;
-  }
-  @keyframes testimonialProgress {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-  .testimonial-dots {
-    display: flex;
-    gap: 10px;
-    margin-top: 16px;
-  }
-  .testimonial-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 0;
-    background: rgba(255,255,255,0.34);
-    cursor: pointer;
-    transition: transform 0.25s ease, background 0.25s ease;
-  }
-  .testimonial-dot.is-active {
-    background: var(--lime);
-    transform: scale(1.2);
+    color: rgba(26,39,68,0.58);
   }
 
   .about {
@@ -1101,6 +932,7 @@
     .operations-showcase { padding: 12px 20px 76px; }
     .operations-header,
     .operations-footer { flex-direction: column; align-items: flex-start; }
+    .operations-meta { width: 100%; }
     .operations-carousel {
       --operations-card-width: 100%;
       --operations-control-overhang: 8px;
@@ -1123,21 +955,6 @@
     .operation-slide { flex-basis: 100%; }
     .operation-visual { min-height: 236px; }
     .operation-body h3 { font-size: 24px; }
-    .testimonials-showcase { padding: 0 20px 76px; }
-    .testimonials-stage,
-    .testimonial-inner { min-height: 480px; }
-    .testimonial-inner { padding: 42px 24px 34px; }
-    .testimonial-content { padding: 30px 24px 24px; border-radius: 24px; }
-    .testimonial-badge {
-      right: 14px;
-      width: 58px;
-      height: 58px;
-      font-size: 44px;
-    }
-    .testimonial-quote { font-size: clamp(22px, 7vw, 34px); margin-bottom: 24px; }
-    .testimonial-meta { margin-bottom: 28px; gap: 10px; }
-    .testimonial-name,
-    .testimonial-role { font-size: 13px; }
     .about { padding: 60px 20px; }
     .about-inner { grid-template-columns: 1fr; }
     .about-images { order: -1; }
@@ -1378,7 +1195,10 @@
         </div>
 
         <div class="operations-footer">
-          <div class="operations-dots" data-carousel-dots></div>
+          <div class="operations-meta">
+            <div class="operations-dots" data-carousel-dots></div>
+            <p class="operations-note">Schuift elke 30 seconden door en pauzeert zodra u handmatig navigeert.</p>
+          </div>
           <a href="wat-we-doen.html" class="btn-primary">
             <span class="icon">+</span>
             Bekijk alle diensten
@@ -1413,63 +1233,6 @@
           <span class="icon">&rarr;</span>
           Meer over ons
         </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="testimonials-showcase" id="klantverhalen">
-    <div class="testimonials-shell">
-      <div class="testimonials-stage" data-testimonial-slider>
-        <article class="testimonial-slide is-active" data-testimonial-slide data-theme="pomuni">
-          <div class="testimonial-inner">
-            <div class="testimonial-badge">&ldquo;</div>
-            <div class="testimonial-content">
-              <blockquote class="testimonial-quote">"Synergo heeft ons goed geholpen bij het uitwerken en uittekenen van managementtools. Ze zijn vastberaden, enthousiast en betrouwbaar."</blockquote>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">Bart Muyshondt</span>
-                <span class="testimonial-role">Managing Director Pomuni</span>
-              </div>
-              <div class="testimonial-progress">
-                <span class="testimonial-progress-bar is-animating" data-testimonial-progress></span>
-              </div>
-              <div class="testimonial-dots" data-testimonial-dots></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="testimonial-slide" data-testimonial-slide data-theme="vanderkroon">
-          <div class="testimonial-inner">
-            <div class="testimonial-badge">&ldquo;</div>
-            <div class="testimonial-content">
-              <blockquote class="testimonial-quote">"De adviseurs en engineers gaan pragmatisch te werk en het kennisniveau is hoog. Onze productielijn is nu nog efficiënter!"</blockquote>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">Dennis van der Kroon</span>
-                <span class="testimonial-role">Directeur Van der Kroon Food Products</span>
-              </div>
-              <div class="testimonial-progress">
-                <span class="testimonial-progress-bar" data-testimonial-progress></span>
-              </div>
-              <div class="testimonial-dots" data-testimonial-dots></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="testimonial-slide" data-testimonial-slide data-theme="zeelandia">
-          <div class="testimonial-inner">
-            <div class="testimonial-badge">&ldquo;</div>
-            <div class="testimonial-content">
-              <blockquote class="testimonial-quote">"Synergo adviseert ons op het gebied van explosieveiligheid. Ze zijn hierin praktisch zeer bekwaam en het kennisniveau is hoog. Het is makkelijk schakelen."</blockquote>
-              <div class="testimonial-meta">
-                <span class="testimonial-name">Kees Toutenhoofd</span>
-                <span class="testimonial-role">Safety Officer Zeelandia</span>
-              </div>
-              <div class="testimonial-progress">
-                <span class="testimonial-progress-bar" data-testimonial-progress></span>
-              </div>
-              <div class="testimonial-dots" data-testimonial-dots></div>
-            </div>
-          </div>
-        </article>
       </div>
     </div>
   </section>

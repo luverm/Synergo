@@ -272,6 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let activeIndex = 0;
     let autoPlayId;
     let resetPending = false;
+    let autoPlayPausedByUser = false;
 
     if (track && viewport && originalSlides.length) {
       const cloneSlides = () => {
@@ -304,8 +305,9 @@ document.addEventListener("DOMContentLoaded", () => {
         dot.type = "button";
         dot.setAttribute("aria-label", `Ga naar kaart ${index + 1}`);
         dot.addEventListener("click", () => {
+          autoPlayPausedByUser = true;
           setActiveSlide(originalSlides.length + index);
-          restartAutoPlay();
+          stopAutoPlay();
         });
         dotsContainer?.appendChild(dot);
         return dot;
@@ -357,11 +359,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const startAutoPlay = () => {
         stopAutoPlay();
-        if (originalSlides.length <= 1) {
+        if (originalSlides.length <= 1 || autoPlayPausedByUser) {
           return;
         }
 
-        autoPlayId = window.setInterval(goToNext, 4800);
+        autoPlayId = window.setInterval(goToNext, 30000);
       };
 
       const restartAutoPlay = () => {
@@ -369,13 +371,15 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       prevButton?.addEventListener("click", () => {
+        autoPlayPausedByUser = true;
         goToPrevious();
-        restartAutoPlay();
+        stopAutoPlay();
       });
 
       nextButton?.addEventListener("click", () => {
+        autoPlayPausedByUser = true;
         goToNext();
-        restartAutoPlay();
+        stopAutoPlay();
       });
 
       operationsCarousel.addEventListener("mouseenter", stopAutoPlay);
@@ -408,86 +412,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  const testimonialSlider = document.querySelector("[data-testimonial-slider]");
-
-  if (testimonialSlider) {
-    const slides = Array.from(testimonialSlider.querySelectorAll("[data-testimonial-slide]"));
-    let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
-    let autoRotateId;
-
-    if (activeIndex < 0) {
-      activeIndex = 0;
-    }
-
-    if (slides.length) {
-      const dotGroups = slides.map((slide) => {
-        const container = slide.querySelector("[data-testimonial-dots]");
-        return slides.map((_, index) => {
-          const dot = document.createElement("button");
-          dot.className = "testimonial-dot";
-          dot.type = "button";
-          dot.setAttribute("aria-label", `Ga naar klantverhaal ${index + 1}`);
-          dot.addEventListener("click", () => {
-            setActiveSlide(index);
-            restartAutoRotate();
-          });
-          container?.appendChild(dot);
-          return dot;
-        });
-      });
-
-      const setProgressState = (slide, shouldAnimate) => {
-        const progressBar = slide.querySelector("[data-testimonial-progress]");
-
-        if (!progressBar) {
-          return;
-        }
-
-        progressBar.classList.remove("is-animating");
-        void progressBar.offsetWidth;
-        if (shouldAnimate) {
-          progressBar.classList.add("is-animating");
-        }
-      };
-
-      const setActiveSlide = (index) => {
-        activeIndex = index;
-
-        slides.forEach((slide, slideIndex) => {
-          const isActive = slideIndex === activeIndex;
-          slide.classList.toggle("is-active", isActive);
-          setProgressState(slide, isActive);
-
-          dotGroups[slideIndex]?.forEach((dot, dotIndex) => {
-            dot.classList.toggle("is-active", dotIndex === activeIndex);
-          });
-        });
-      };
-
-      const goToNextSlide = () => {
-        setActiveSlide((activeIndex + 1) % slides.length);
-      };
-
-      const stopAutoRotate = () => {
-        if (autoRotateId) {
-          window.clearInterval(autoRotateId);
-        }
-      };
-
-      const startAutoRotate = () => {
-        stopAutoRotate();
-        autoRotateId = window.setInterval(goToNextSlide, 6200);
-      };
-
-      const restartAutoRotate = () => {
-        startAutoRotate();
-      };
-
-      testimonialSlider.addEventListener("mouseenter", stopAutoRotate);
-      testimonialSlider.addEventListener("mouseleave", startAutoRotate);
-
-      setActiveSlide(activeIndex);
-      startAutoRotate();
-    }
-  }
 });
