@@ -147,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const scrollHero = document.querySelector("[data-scroll-hero]");
+  const scrollIndicator = document.querySelector("[data-scroll-indicator]");
   let heroStart = 0;
   let heroDistance = 1;
 
@@ -171,6 +172,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     scrollHero.style.setProperty("--hero-progress", progress.toFixed(4));
     scrollHero.style.setProperty("--hero-ease", easedProgress.toFixed(4));
+
+    if (scrollIndicator) {
+      scrollIndicator.classList.toggle("is-hidden", progress > 0.16);
+    }
   };
 
   const onScroll = () => {

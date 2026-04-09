@@ -299,7 +299,7 @@
   /* ─── HERO ─── */
   .hero {
     position: relative;
-    min-height: 220vh;
+    min-height: 172vh;
     overflow: hidden;
     background: var(--navy-dark);
     color: var(--white);
@@ -503,6 +503,72 @@
     color: rgba(255,255,255,calc(0.74 - (var(--hero-ease) * 0.42)));
     letter-spacing: 0.02em;
   }
+  .scroll-indicator {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    z-index: 130;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 10px 12px 12px;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(15,26,46,0.58), rgba(15,26,46,0.24));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transform: translate3d(0, -50%, 0);
+    box-shadow: 0 18px 36px rgba(15,26,46,0.18);
+    transition: opacity 260ms ease, transform 260ms ease;
+    pointer-events: none;
+  }
+  .scroll-indicator.is-hidden {
+    opacity: 0;
+    transform: translate3d(10px, -50%, 0);
+  }
+  .scroll-indicator-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+  }
+  .scroll-indicator-track {
+    position: relative;
+    width: 2px;
+    height: 90px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.16);
+    overflow: hidden;
+  }
+  .scroll-indicator-dot {
+    position: absolute;
+    left: 50%;
+    width: 10px;
+    height: 22px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(168,212,36,1), rgba(124,226,239,0.92));
+    box-shadow: 0 0 18px rgba(168,212,36,0.4);
+    transform: translateX(-50%);
+    animation: scrollCue 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollCue {
+    0% {
+      top: 8px;
+      opacity: 0.35;
+    }
+    45% {
+      top: 34px;
+      opacity: 1;
+    }
+    100% {
+      top: 60px;
+      opacity: 0.35;
+    }
+  }
   .hero-panel {
     position: relative;
     display: grid;
@@ -680,7 +746,7 @@
   /* ─── ABOUT ─── */
   .operations-showcase {
     position: relative;
-    padding: 0 48px 96px;
+    padding: 0 48px 84px;
     margin-top: -1px;
     background:
       radial-gradient(circle at 12% 10%, rgba(168,212,36,0.18), transparent 24%),
@@ -701,7 +767,7 @@
     z-index: 1;
     max-width: 1180px;
     margin: 0 auto;
-    padding-top: 56px;
+    padding-top: 24px;
   }
   .operations-header {
     display: flex;
@@ -1005,7 +1071,7 @@
   }
 
   .about {
-    padding: 80px 48px 100px;
+    padding: 64px 48px 92px;
     background: var(--white);
   }
   .about-inner {
@@ -1142,7 +1208,7 @@
   @media (max-width: 768px) {
     nav { padding: 16px 20px; }
     .nav-links { display: none; }
-    .hero { min-height: 190vh; }
+    .hero { min-height: 154vh; }
     .hero-shell { padding: 104px 20px 34px; }
     .hero-story {
       grid-template-columns: 1fr;
@@ -1184,7 +1250,14 @@
       font-size: 10px;
       letter-spacing: 0.12em;
     }
-    .operations-showcase { padding: 0 20px 76px; }
+    .scroll-indicator {
+      right: 12px;
+      padding: 10px 8px 10px 10px;
+    }
+    .scroll-indicator-track {
+      height: 72px;
+    }
+    .operations-showcase { padding: 0 20px 68px; }
     .operations-header,
     .operations-footer { flex-direction: column; align-items: flex-start; }
     .operations-meta { width: 100%; }
@@ -1210,7 +1283,7 @@
     .operation-slide { flex-basis: 100%; }
     .operation-visual { min-height: 236px; }
     .operation-body h3 { font-size: 24px; }
-    .about { padding: 60px 20px; }
+    .about { padding: 48px 20px 76px; }
     .about-inner { grid-template-columns: 1fr; }
     .about-images { order: -1; }
     .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 28px; }
@@ -1237,6 +1310,13 @@
       <div class="intro-kicker">Forward in food processing</div>
       <div class="intro-subline">Factory Transition Engineering</div>
     </div>
+  </div>
+
+  <div class="scroll-indicator" data-scroll-indicator aria-hidden="true">
+    <span class="scroll-indicator-label">Scroll</span>
+    <span class="scroll-indicator-track">
+      <span class="scroll-indicator-dot"></span>
+    </span>
   </div>
 
   <!-- NAVBAR -->
