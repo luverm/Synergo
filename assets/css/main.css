@@ -123,6 +123,10 @@ nav {
     transform var(--transition-base);
 }
 
+body.page-home nav {
+  position: fixed;
+}
+
 body.js-enhanced nav {
   will-change: background-color, box-shadow;
 }
