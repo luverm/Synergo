@@ -824,10 +824,21 @@
     opacity: 0.72;
     transition: transform 0.7s ease, opacity 0.7s ease, box-shadow 0.7s ease;
   }
+  .operation-slide .operation-visual,
+  .operation-slide .operation-body {
+    transition: filter 0.7s ease, opacity 0.7s ease;
+    filter: blur(4px) saturate(0.84);
+    opacity: 0.7;
+  }
   .operation-slide.is-active {
     transform: scale(1);
     opacity: 1;
     box-shadow: 0 28px 60px rgba(15,26,46,0.14);
+  }
+  .operation-slide.is-active .operation-visual,
+  .operation-slide.is-active .operation-body {
+    filter: none;
+    opacity: 1;
   }
   .operation-visual {
     position: relative;
