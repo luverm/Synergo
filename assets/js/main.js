@@ -190,7 +190,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ".hero-copy",
     ".hero-panel",
     ".page-hero",
-    ".service-card",
     ".about-grid > *",
     ".stat-item",
     ".project-card",
