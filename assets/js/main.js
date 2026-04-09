@@ -146,15 +146,49 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const onScroll = () => {
-    body.classList.toggle("scrolled", window.scrollY > 16);
+  const scrollHero = document.querySelector("[data-scroll-hero]");
+  let heroStart = 0;
+  let heroDistance = 1;
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  const measureScrollHero = () => {
+    if (!scrollHero) {
+      return;
+    }
+
+    heroStart = window.scrollY + scrollHero.getBoundingClientRect().top;
+    heroDistance = Math.max(scrollHero.offsetHeight - window.innerHeight, 1);
   };
 
+  const updateScrollHero = () => {
+    if (!scrollHero) {
+      return;
+    }
+
+    const progress = clamp((window.scrollY - heroStart) / heroDistance, 0, 1);
+    const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+    scrollHero.style.setProperty("--hero-progress", progress.toFixed(4));
+    scrollHero.style.setProperty("--hero-ease", easedProgress.toFixed(4));
+  };
+
+  const onScroll = () => {
+    body.classList.toggle("scrolled", window.scrollY > 16);
+    updateScrollHero();
+  };
+
+  measureScrollHero();
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", () => {
+    measureScrollHero();
+    updateScrollHero();
+  });
 
   const revealSelectors = [
-    ".hero-content",
+    ".hero-copy",
+    ".hero-panel",
     ".page-hero",
     ".service-card",
     ".about-grid > *",
