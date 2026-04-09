@@ -366,10 +366,6 @@ document.addEventListener("DOMContentLoaded", () => {
         autoPlayId = window.setInterval(goToNext, 30000);
       };
 
-      const restartAutoPlay = () => {
-        startAutoPlay();
-      };
-
       prevButton?.addEventListener("click", () => {
         autoPlayPausedByUser = true;
         goToPrevious();
@@ -381,9 +377,6 @@ document.addEventListener("DOMContentLoaded", () => {
         goToNext();
         stopAutoPlay();
       });
-
-      operationsCarousel.addEventListener("mouseenter", stopAutoPlay);
-      operationsCarousel.addEventListener("mouseleave", startAutoPlay);
 
       track.addEventListener("transitionend", () => {
         if (activeIndex >= originalSlides.length * 2) {
