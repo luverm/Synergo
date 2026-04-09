@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (error) {
         // Ignore storage failures and keep the intro as a progressive enhancement.
       }
-    }, 2900);
+    }, 3200);
   } else if (introElement) {
     body.classList.add("intro-complete");
   }
