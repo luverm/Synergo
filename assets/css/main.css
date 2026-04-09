@@ -215,8 +215,8 @@ body.page-inner.scrolled nav {
 }
 
 .nav-links li.has-submenu {
-  padding-bottom: 18px;
-  margin-bottom: -18px;
+  padding-bottom: 10px;
+  margin-bottom: -10px;
 }
 
 .nav-links a.has-dropdown {
@@ -246,7 +246,7 @@ body.page-inner.scrolled nav {
 
 .nav-dropdown {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 2px);
   left: 0;
   min-width: 240px;
   display: grid;
@@ -258,7 +258,7 @@ body.page-inner.scrolled nav {
   box-shadow: 0 18px 42px rgba(15, 26, 46, 0.14);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px) scale(0.98);
+  transform: translateY(6px) scale(0.98);
   transform-origin: top left;
   pointer-events: none;
   transition:
