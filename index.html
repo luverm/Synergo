@@ -167,69 +167,9 @@
   body.intro-ready .intro-logo path:nth-child(2) { transition-delay: 140ms; }
   body.intro-ready .intro-logo path:nth-child(3) { transition-delay: 250ms; }
 
-  .intro-kicker,
-  .intro-subline {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--navy);
-    opacity: 0;
-    transform: translateY(14px);
-    transition:
-      opacity 520ms ease,
-      transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  .intro-kicker {
-    font-weight: 800;
-    font-size: clamp(28px, 4vw, 46px);
-    line-height: 1.05;
-    letter-spacing: -0.04em;
-  }
-
-  .intro-subline {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 700;
-    font-size: clamp(11px, 1.1vw, 14px);
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: rgba(26,39,68,0.68);
-  }
-
-  .intro-subline::before,
-  .intro-subline::after {
-    content: "";
-    width: 56px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(168,212,36,0.9));
-  }
-
-  .intro-subline::after {
-    transform: scaleX(-1);
-  }
-
-  body.intro-ready .intro-kicker,
-  body.intro-ready .intro-subline {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  body.intro-ready .intro-kicker { transition-delay: 320ms; }
-  body.intro-ready .intro-subline { transition-delay: 460ms; }
-
   @media (max-width: 768px) {
     .home-intro-inner {
-      gap: 18px;
-    }
-
-    .intro-subline {
-      letter-spacing: 0.16em;
-      gap: 8px;
-    }
-
-    .intro-subline::before,
-    .intro-subline::after {
-      width: 28px;
+      gap: 0;
     }
   }
 
@@ -1307,8 +1247,6 @@
           </g>
         </svg>
       </div>
-      <div class="intro-kicker">Forward in food processing</div>
-      <div class="intro-subline">Factory Transition Engineering</div>
     </div>
   </div>
 
